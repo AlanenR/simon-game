@@ -2,6 +2,11 @@ var btnColors = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
 
+// Detect first keypress and start game
+$(document).one("keypress", function(){
+    nextSequence();
+});
+
 // Button event handeler to detect clicks and add the id to UserClicked pattern array
 var btnClicked = $(".btn").on("click", function(event){
     var userChosenColor = (event.target.id);
@@ -9,14 +14,6 @@ var btnClicked = $(".btn").on("click", function(event){
     addSound(userChosenColor);
     animatePress(userChosenColor);
 });
-
-// Detect first keypress and start game
-var firstPress = $(document).keypress(function(){
-
-});
-
-
-
 
 function nextSequence() {
     var randomNbr = Math.floor(Math.random() * 4);
@@ -46,6 +43,3 @@ function animatePress(currentColor){
     }), 100;
 
 }
-
-
-
