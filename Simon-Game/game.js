@@ -23,32 +23,35 @@ var btnClicked = $(".btn").on("click", function(event){
     userClickedPattern.push(userChosenColor);
     addSound(userChosenColor);
     animatePress(userChosenColor);
-    checkAnswer(level);
+    checkAnswer(userClickedPattern.length - 1);
 });
 
 // Machine game pattern
 function nextSequence() {
-            level++;
-            updateH1(level);
-            var randomNbr = Math.floor(Math.random() * 4);
-            var randomChosenColor = btnColors[randomNbr];
-            gamePattern.push(randomChosenColor);
-            addAnimation(randomChosenColor);
-            addSound(randomChosenColor);
+    userClickedPattern = [];
+    level++;
+    updateH1(level);
+    var randomNbr = Math.floor(Math.random() * 4);
+    var randomChosenColor = btnColors[randomNbr];
+    gamePattern.push(randomChosenColor);
+    addAnimation(randomChosenColor);
+    addSound(randomChosenColor);
 }
 
 // Checks user clicks against the game pattern
-function checkAnswer(level){
-    var machine = gamePattern[level - 1];
-    var player = userClickedPattern[level - 1]
+function checkAnswer(index){
+    var machine = gamePattern[index];
+    var player = userClickedPattern[index]
     if(machine === player) {
-        nextSequence();
+        if(userClickedPattern.length === gamePattern.length) {
+            setTimeout(function (){
+                nextSequence();
+            }, 1000)
+        }
     }
     else if(machine != player) {
         alert("loser");
     }
-    console.log(machine);
-    console.log(player);
 }
 
 
