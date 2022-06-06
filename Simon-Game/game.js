@@ -50,7 +50,13 @@ function checkAnswer(index){
         }
     }
     else if(machine != player) {
-        alert("loser");
+        $("body").addClass("game-over");
+        addSound("wrong");
+        setTimeout(function() {
+            $("body").removeClass("game-over");
+        }, 200);
+        $("h1").text("Game Over, Press Any Key to Restart");
+        gameOver();
     }
 }
 
@@ -67,10 +73,17 @@ function addSound(sound){
     audio.play();
 }
 
+// Animation for the click
 function animatePress(currentColor){
     $("#" + currentColor).addClass("pressed");
     setTimeout(function(){
         $("#" + currentColor).removeClass("pressed");
     }), 100;
+}
 
+// Resets game
+function gameOver() {
+    level = 0;
+    gamePattern = [];
+    gameOn = false;
 }
